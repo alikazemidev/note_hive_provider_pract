@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 void main() {
   runApp(const MainApp());
@@ -35,31 +36,76 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Column(
           children: [
-            Spacer(),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 15,
+                itemBuilder: (context, index) {
+                  return Slidable(
+                    key: const ValueKey(0),
+                    endActionPane: ActionPane(
+                      motion: ScrollMotion(),
+                      children: [
+                        SlidableAction(
+                          // An action can be bigger than the others.
+                          onPressed: (context) {},
+                          backgroundColor: Color.fromARGB(255, 49, 7, 186),
+                          foregroundColor: Colors.white,
+                          icon: Icons.edit,
+                          label: 'edit'.toUpperCase(),
+                        ),
+                        SlidableAction(
+                          onPressed: (context) {},
+                          backgroundColor: Color.fromARGB(255, 255, 0, 0),
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: 'delete'.toUpperCase(),
+                        ),
+                      ],
+                    ),
+                    child: Card(
+                      child: ListTile(
+                        leading: Icon(Icons.access_alarms),
+                        title: Text(
+                          'item $index',
+                          style: TextStyle(
+                            fontSize: 22,
+                          ),
+                        ),
+                        subtitle: Text('subtitle $index'),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            // Spacer(),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: TextField(
                 controller: _taskController,
                 decoration: InputDecoration(
-                    hintText: 'your task is...',
-                    border: InputBorder.none,‍
-                    fillColor: Colors.grey.shade600,
-                    filled: true,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    suffixIcon: Container(
-                      margin: EdgeInsets.only(right: 10),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Icon(
-                          Icons.add,
-                        ),
+                  hintText: 'your task is...',
+                  border: InputBorder.none,
+                  fillColor: Colors.grey.shade600,
+                  filled: true,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  suffixIcon: Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print(_taskController.text);
+                      },
+                      child: Icon(
+                        Icons.add,
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
