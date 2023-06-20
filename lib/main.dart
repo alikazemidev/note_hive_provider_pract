@@ -64,7 +64,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Card(
                       child: ListTile(
-                        leading: Icon(Icons.access_alarms),
+                        leading: Transform.scale(
+                          scale: 1.5,
+                          child: Checkbox(
+                            fillColor: MaterialStatePropertyAll(Colors.green),
+                            checkColor: Colors.white,
+                            shape: CircleBorder(side: BorderSide()),
+                            onChanged: (value) {},
+                            value: true,
+                          ),
+                        ),
                         title: Text(
                           'item $index',
                           style: TextStyle(
@@ -72,6 +81,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         subtitle: Text('subtitle $index'),
+                        trailing: Text(
+                          '${DateTime.now().hour}:${DateTime.now().minute}',
+                          style: TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
                       ),
                     ),
                   );
